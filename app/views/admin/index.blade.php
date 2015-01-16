@@ -1,9 +1,9 @@
 @extends('admin.layouts.layout')
-@section('tittle_page')
+@section('title_page')
     Principal
 @stop
 
-@section('tittle_container')
+@section('title_container')
 	Home
 @stop
 

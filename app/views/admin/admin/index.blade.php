@@ -1,9 +1,9 @@
 @extends('admin.layouts.layout')
-@section('tittle_page')
+@section('title_page')
     Administradores
 @stop
 
-@section('tittle_container')
+@section('title_container')
 	Administradores
 @stop
 
@@ -73,9 +73,13 @@
     </div> -->
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+@stop
+
+@section('js_functions')
     <script>
-    $(document).ready(function() {
-        $('#dataTables-example').dataTable();
-    });
+        $(document).ready(function() {
+            $('#dataTables-example').dataTable();
+        });
     </script>
 @stop

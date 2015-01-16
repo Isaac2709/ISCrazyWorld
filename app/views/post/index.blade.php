@@ -1,10 +1,10 @@
 @extends('layouts.layout_post')
 
-@section('tittle_page')
+@section('title_page')
     {{ $post->titulo }}
 @stop
 
-@section('tittle_post')
+@section('title_post')
     {{ $post->titulo }}
 @stop
 

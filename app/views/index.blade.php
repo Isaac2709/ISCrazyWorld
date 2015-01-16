@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('tittle_page')
+@section('title_page')
     Página Principal
 @stop
 
@@ -16,13 +16,13 @@
 	    ?>
         <span class="glyphicon glyphicon-time"></span> Posted on {{ $fecha->format('M d, Y') }} at {{ $fecha->format('h:i A') }}
             by <a href="index.php">{{ $post->admin->username }}</a>
-        </p>        
+        </p>
 
         <!-- Posted on August 28, 2013 at 10:00 PM -->
         <hr>
         <img class="img-responsive" src="http://placehold.it/900x300" alt="">
         <hr>
-        <p>            
+        <p>
         	{{
         		$body = substr(strip_tags($post->body), 0, 200);
 	            if(strlen($post->body) > 200){

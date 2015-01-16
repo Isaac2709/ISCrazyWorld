@@ -1,9 +1,9 @@
 @extends('admin.layouts.layout')
-@section('tittle_page')
+@section('title_page')
     Entradas
 @stop
 
-@section('tittle_container')
+@section('title_container')
 	Entradas
 @stop
 
@@ -88,8 +88,8 @@
         .table_row{
             display: table-row;
         }
-        .table_row:hover{
-
+        .table_row_group:hover{
+            cursor:pointer;
         }
         .tittle_cell_table{
             color: rgba(122, 81, 81, 0.95);
@@ -122,16 +122,24 @@
             padding-top: 10px;
             padding-bottom: 10px;
         }
+        .tags_cell_table{
+            margin: 0px 0px 0px 10px;
+            display: inline-block;
+        }
+        /*.table_row_group .btn.{
+            visibility: hidden;
+        }*/
     </style>
 
     <div class="ISC_table">
         <div class="table_column"></div><div class="table_column"></div><div class="table_column"></div>
+        <!-- Header of the table -->
         <div class="head_table">
             <div class="head_cell_table">
                 Nombre
             </div>
             <div class="head_cell_table">
-
+                Autor
             </div>
             <div class="head_cell_table date_cell_table">
                 Fecha&nbsp;&nbsp;
@@ -139,28 +147,42 @@
         </div>
         @foreach($posts as $post)
             <div class="table_row_group">
+                <!-- First Panel - The information area post -->
                 <div class="table_row">
+                    <!-- First Column - The tittle post and the tags of the post -->
                     <div class="table_cell">
+                        <!-- Tittle post -->
                         <div class="tittle_cell_table">
                             {{ $post->titulo }}
                         </div>
+                        <!-- List of tags post -->
+                        <div class="tags_cell_table">
+                            <ul class="list-inline">
+                            @foreach($post->tags as $tag)
+                                <li><a href="" class=""><small>{{ $tag->name }}</small></a></li>
+                            @endforeach
+                            </ul>
+                        </div>
                      </div>
-
+                    <!-- Second Column - The name of the autor of the post -->
                     <div class="table_cell">
-
+                        {{ $post->admin->person->name }}
                     </div>
-
+                    <!-- Third Column - The publication date of the post-->
                     <div class="table_cell">
                         <div class="date_cell_table">
                             {{ $post->date }}
                         </div>
                     </div>
                 </div>
+                <!-- Second Panel - The buttons area -->
                 <div class="table_row_bottom">
                     <div class="table_cell">
+                        <a href="{{ '/post/'.$post->id }}" class="btn btn-info"> Ver </a>
                         <a href="{{ action('PostController@getEdit', $post->id) }}" class="btn btn-warning">Editar</a>
                         <input type="button" class="btn btn-danger" value="Eliminar">
                     </div>
+                    <!-- NOT Completed -->
                     <div class="table_cell">
 
                     </div>
@@ -181,8 +203,37 @@
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <!-- <script>
-    $(document).ready(function() {
-        $('#dataTables-example').dataTable();
-    });
+        $('.ISC_table').ready(function() {
+            // $('#dataTables-example').dataTable();
+            $('#table_row_group').click(function(){
+                $(this).hide();
+            });
+        });
     </script> -->
+    <!-- jQuery -->
+@stop
+
+@section('js_functions')
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').dataTable();
+            $('.table_row_group').click(function(){
+                // $(this).hide();
+                $(location).attr( 'href', $(this).find('.btn.btn-info').attr('href') );
+            });
+            // $(".table_row_group").hover( function(){
+            //   $(this).animate({ opacity: 0.50}, 300);
+            // }, function(){
+            //   $(this).animate({opacity: 1,left: "-=50"}, 300);
+            // });
+            $(".table_row_group").find('.btn').css({
+                opacity: '0',
+            });
+            $(".table_row_group").hover( function(){
+              $(this).find('.btn').animate({ opacity: 1}, 200);
+            }, function(){
+              $(this).find('.btn').animate({opacity: 0}, 200);
+            });
+        });
+    </script>
 @stop

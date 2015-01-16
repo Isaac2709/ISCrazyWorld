@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout_edit')
-@section('tittle_page')
+@section('title_page')
     Editar entrada
 @stop
 
@@ -14,7 +14,7 @@
 <form ng-submit="vm.enviar()">
 @stop
 
-@section('tittle_container')
+@section('title_container')
 <!-- LABELS EDITABLES -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script> -->
 
@@ -71,7 +71,7 @@
     <div>
         <tags-input class="bootstrap"
                     id="tag_name"
-                    ng-model="fdatos.movies"
+                    ng-model="vm.fdatos.movies"
                     placeholder="Agregar un tag"
                     on-tag-added="vm.showButtonsToEdit($query)"
                     on-tag-removed="vm.showButtonsToEdit($query)"
@@ -87,13 +87,11 @@
 
 @section('Close_form')
     {{ Form::close() }}
-    @foreach($post->tags()->lists('name') as $tag)
-        {{ $tag }}
-    @endforeach
 </div>
-
+    <!-- AngularJS v1.2.25 -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <!-- <script src="/admin/js/controller_admin.js"></script> -->
+
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.css" />
     <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.js"></script>
 
@@ -128,31 +126,31 @@
                 })
                 .setTextAutosizeThreshold(15);
         })*/;
-        app.controller('postCtrl',['$scope','$log','$http', function($scope, $log,$http) {
+        app.controller('postCtrl',['$log','$http', function($log,$http) {
                 var vm = this;
 
                 //inicializo un objeto en los datos de formulario
-                $scope.fdatos = {
-                    tittle_post:"{{ $post->titulo }}",
-                    content_post:"\""+{{ $post->body }}+"\"",
+                vm.fdatos = {
+                    tittle_post:"",
+                    content_post:"",
                     id:-1,
                     movies:{{ json_encode($post->tags()->lists('name')) }}
                 };
-                $log.debug($scope.fdatos.tittle_post);
+                // $log.debug($scope.fdatos.tittle_post);
                 $.get('/admin/posts/data', { post_id:'{{$post->id}}'  }, 'JSON')
                     .success(function(data, status) {
-                        $scope.datos = data.tags;//así enviamos los posts a la vista
-                        $scope.fdatos.tittle_post = data.post.titulo;
-                        $scope.fdatos.content_post = data.post.body;
-                        $scope.fdatos.id = data.post.id;
-                        $scope.fdatos.movies = data.tags;
+                        vm.datos = data.tags;//así enviamos los posts a la vista
+                        vm.fdatos.tittle_post = data.post.titulo;
+                        vm.fdatos.content_post = data.post.body;
+                        vm.fdatos.id = data.post.id;
+                        vm.fdatos.movies = data.tags;
 
                     })
                     .error(function(data, status) {
                         alert("Ha fallado la petición. Estado HTTP:"+status);
                     })
                 ;
-                $log.debug("Acabamos de crear el $scope");
+                // $log.debug("Acabamos de crear el $scope");
                 // $http({
                 //     method: 'GET',
                 //     url: '/admin/posts/data',

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout_edit')
-@section('tittle_page')
+@section('title_page')
     Nueva entrada
 @stop
 

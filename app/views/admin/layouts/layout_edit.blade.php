@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Isaac Pacheco Corella">
 
-    <title>ISCrazyWorld | @yield('tittle_page')</title>
+    <title>ISCrazyWorld | @yield('title_page')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -70,12 +70,12 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <h1 class="page-header">@yield('tittle_page')</h1>
+                    <h1 class="page-header">@yield('title_page')</h1>
                 </div>
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            @yield('tittle_container')
+                            @yield('title_container')
                         </div>
                         <div class="panel-body">
                             @yield('container')

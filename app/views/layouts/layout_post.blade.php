@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ISCrazyWorld | @yield('tittle_page')</title>
+    <title>ISCrazyWorld | @yield('title_page')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>@yield('tittle_post')</h1>
+                <h1>@yield('title_post')</h1>
 
                 <!-- Author -->
                 <p class="lead">

@@ -1,9 +1,9 @@
 @extends('admin.layouts.layout')
-@section('tittle_page')
+@section('title_page')
     Entradas
 @stop
 
-@section('tittle_container')
+@section('title_container')
     Entradas
 @stop
 
