@@ -41,6 +41,9 @@
                     <li @yield('users_active')>
                         <a href="buttons.html"> Usuarios</a>
                     </li>
+                    <li>
+                        <a href="{{ URL::TO('admin/categories')}}" @yield('category_active')>Categorias</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

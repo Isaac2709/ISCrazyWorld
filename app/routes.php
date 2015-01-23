@@ -23,6 +23,7 @@ Route::get('admin', function()
 // The controllers routes
 Route::controller('admin/posts', 'PostController');
 Route::controller('admin/admins', 'AdminController');
+Route::controller('admin/categories', 'CategoryController');
 
 // The filter for site administrators come
 Route::get('admin/', array('before' => 'auth' , function(){

@@ -17,8 +17,26 @@ class PostController extends BaseController {
 
 	public function getIndex()
 	{
+		$categories = Category::all();
 		$posts = Entrada::All();
-		return View::make('admin.post.index')->with('posts', $posts);
+		return View::make('admin.post.index')->with('posts', $posts)->with('categories', $categories);
+	}
+
+	///////////////////////////////////////
+	// UPDATE the category of the posts //
+	///////////////////////////////////////
+	public function postIndex()
+	{
+		// $object = json_decode(file_get_contents("php://input"));
+		$post = Entrada::find(Input::get('id_post'));
+		$category = Category::find(Input::get('category_post'));
+		$post->category_id = Input::get('category_post');
+		$post->save();
+		// $n = 0;
+		// while($n<10000000000000000){
+		// 	$n++;
+		// }
+		// return Response::json($post->title);
 	}
 
 	public function getEdit($id)
@@ -42,7 +60,7 @@ class PostController extends BaseController {
 			// Esto nos devolvería una cadena de texto, que si quieres volcar a un objeto nativo de PHP usarás la función json_decode()
 			$objDatos = json_decode(file_get_contents("php://input"));
 			$post = Entrada::find($objDatos->id);
-			$post->titulo = $objDatos->tittle_post;
+			$post->title = $objDatos->title_post;
 			$post->body = $objDatos->content_post;
 			$all_tags = array();
 			$tags = array();
@@ -72,7 +90,7 @@ class PostController extends BaseController {
 
 		// }
 		// $post = Entrada::find($id);
-		// $post->titulo = Input::get('tittle_post');
+		// $post->titulo = Input::get('title_post');
 		// $post->body = Input::get('content_post');
 		// // $post->save();
 
@@ -91,7 +109,7 @@ class PostController extends BaseController {
 
 	public function postCreate(){
 		$post = new Entrada;
-		$post->titulo = Input::get('tittle_post');
+		$post->title = Input::get('title_post');
 		$post->body = Input::get('content_post');
 		$post->date = date('Y-n-N H:i:s');
 		$post->admin_id = Auth::id();

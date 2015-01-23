@@ -3,18 +3,18 @@
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Tag extends Eloquent{
+class Category extends Eloquent{
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'tags';
+	protected $table = 'categories';
 	//protected $primaryKey = 'cedula';
 
 	public function posts(){
-        return $this->belongsToMany('Post', 'post_tag', 'tag_id', 'post_id');
+        return $this->hasMany('Post', 'category_post', 'category_id', 'post_id');
     }
 
     /*

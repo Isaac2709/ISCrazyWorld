@@ -15,6 +15,7 @@ class Users extends Migration {
 		Schema::create('users', function($table){
 			$table->unsignedInteger('people_id');
 			$table->foreign('people_id')->references('id')->on('people')->onDelete('cascade');
+			$table->primary('people_id');
             $table->string('username');
             $table->string('password');
             $table->string('photo');

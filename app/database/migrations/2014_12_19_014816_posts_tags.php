@@ -12,7 +12,7 @@ class PostsTags extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('posts_tags', function($table){
+		Schema::create('post_tag', function($table){
 			$table->unsignedInteger('post_id');
 			$table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 			$table->unsignedInteger('tag_id');
@@ -29,7 +29,7 @@ class PostsTags extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('posts_tags');
+		Schema::drop('post_tag');
 	}
 
 }

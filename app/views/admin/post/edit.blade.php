@@ -25,10 +25,10 @@
                 </div> -->
 
 	<div style="float:left;" class="div_name_post" id="div_label_name_post">
-        {{ Form::label('tittle_post_label', $post->titulo, array('class'=>'control-label', 'id' => 'tittle_post_label', 'onclick'=>'cambiarTituloText()')) }}
+        {{ Form::label('title_post_label', $post->title, array('class'=>'control-label', 'id' => 'title_post_label', 'onclick'=>'cambiarTituloText()')) }}
     </div>
-    <div style="float:left;" class="div_name_post col-sm-9" id="div_text_tittle_post" style="display: none;">
-        <input type="text" name="tittle_post" value="{{ $post->titulo }}" style="display:none;" class= "form-control" id="tittle_post" onBlur="cambiarTituloLabel()" ng-model="vm.fdatos.tittle_post">
+    <div style="float:left;" class="div_name_post col-sm-9" id="div_text_title_post" style="display: none;">
+        <input type="text" name="title_post" value="{{ $post->title }}" style="display:none;" class= "form-control" id="title_post" onBlur="cambiarTituloLabel()" ng-model="vm.fdatos.title_post">
     </div>
 	<div class="form-group" style="text-align:right;">
         {{ Form::submit('Guardar' , array('class'=> 'btn btn-success', 'style' => 'float:right;display:none;', 'id' => 'btnSave')) }}
@@ -131,25 +131,25 @@
 
                 //inicializo un objeto en los datos de formulario
                 vm.fdatos = {
-                    tittle_post:"",
-                    content_post:"",
-                    id:-1,
-                    movies:{{ json_encode($post->tags()->lists('name')) }}
+                    title_post:"{{$post->title}}",
+                    content_post:$("#content_post").val(),
+                    id:"{{$post->id}}",
+                    movies: {{ json_encode($post->tags()->lists('name')) }}
                 };
-                // $log.debug($scope.fdatos.tittle_post);
-                $.get('/admin/posts/data', { post_id:'{{$post->id}}'  }, 'JSON')
-                    .success(function(data, status) {
-                        vm.datos = data.tags;//así enviamos los posts a la vista
-                        vm.fdatos.tittle_post = data.post.titulo;
-                        vm.fdatos.content_post = data.post.body;
-                        vm.fdatos.id = data.post.id;
-                        vm.fdatos.movies = data.tags;
+                // $.get('/admin/posts/data', { post_id:'{{$post->id}}'  }, 'JSON')
+                //     .success(function(data, status) {
+                //         vm.datos = data.tags;//así enviamos los posts a la vista
+                //         vm.fdatos.tittle_post = data.post.titulo;
+                //         vm.fdatos.content_post = data.post.body;
+                //         vm.fdatos.id = data.post.id;
+                //         // vm.fdatos.movies = data.tags;
 
-                    })
-                    .error(function(data, status) {
-                        alert("Ha fallado la petición. Estado HTTP:"+status);
-                    })
-                ;
+                //     })
+                //     .error(function(data, status) {
+                //         alert("Ha fallado la petición. Estado HTTP:"+status);
+                //     }
+                // );
+
                 // $log.debug("Acabamos de crear el $scope");
                 // $http({
                 //     method: 'GET',
@@ -175,7 +175,6 @@
                     // $tags = $.get('/getTagss', {},'JSON');
                     // console.log($tags);
                     // vm.fdatos.movies = $.get('/getTagss', {},'JSON');
-                // vm.fdatos.movies = vm.datos.tags;
                 vm.loadMovies = function(query) {
                     // return $http.get('/admin/js/tags.json');
                     // $.ajax({url:"/admin/posts/tags",dataType: 'JSON',error: function() {
@@ -199,9 +198,9 @@
                         $('#btnEdit').css('display', 'inline');
                         $('#btnPreview').css('display', 'none');
                         $('#btnSave').css('display', 'inline');
-                        $('#div_text_tittle_post').css('display', 'none');
+                        $('#div_text_title_post').css('display', 'none');
                     }
-                }
+                };
 
                  // declaro la función enviar
                 vm.enviar = function(){
@@ -209,10 +208,11 @@
                     $http.post("", vm.fdatos)
                         .success(function(res){
                             console.log(res);
+
                             //por supuesto podrás volcar la respuesta al modelo con algo como vm.res = res;
                         }
                     );
-                }
+                };
             }]
         );
     </script>

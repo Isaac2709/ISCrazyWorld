@@ -31,7 +31,7 @@
                 @if($posts)
                     @foreach($posts as $post)
                     <tr class="even gradeC">
-                        <td>{{ $post->titulo }}</td>
+                        <td>{{ $post->title }}</td>
                         <td>{{ $post->date }}</td>
                         <?php
                             $body = substr(strip_tags($post->body), 0, 40);
@@ -91,12 +91,12 @@
         .table_row_group:hover{
             cursor:pointer;
         }
-        .tittle_cell_table{
+        .title_cell_table{
             color: rgba(122, 81, 81, 0.95);
             font-weight: bold;
             float: left;
         }
-        .tittle_cell_table:hover{
+        .title_cell_table:hover{
             color: rgba(15, 13, 13, 0.95);
         }
         .btn_cell_table{
@@ -130,6 +130,9 @@
             visibility: hidden;
         }*/
     </style>
+    <div class="loading text-center" style="opacity: 0">
+        <img src="http://www.clinicabaviera.com/imagenes/cargando.gif" alt="loading" width="40px">
+    </div>
 
     <div class="ISC_table">
         <div class="table_column"></div><div class="table_column"></div><div class="table_column"></div>
@@ -149,11 +152,11 @@
             <div class="table_row_group">
                 <!-- First Panel - The information area post -->
                 <div class="table_row">
-                    <!-- First Column - The tittle post and the tags of the post -->
+                    <!-- First Column - The title post and the tags of the post -->
                     <div class="table_cell">
-                        <!-- Tittle post -->
-                        <div class="tittle_cell_table">
-                            {{ $post->titulo }}
+                        <!-- title post -->
+                        <div class="title_cell_table">
+                            {{ $post->title }}
                         </div>
                         <!-- List of tags post -->
                         <div class="tags_cell_table">
@@ -177,10 +180,29 @@
                 </div>
                 <!-- Second Panel - The buttons area -->
                 <div class="table_row_bottom">
+                    <input class="id_post" type="text" value="{{ $post->id }}" style="display: none">
                     <div class="table_cell">
                         <a href="{{ '/post/'.$post->id }}" class="btn btn-info"> Ver </a>
                         <a href="{{ action('PostController@getEdit', $post->id) }}" class="btn btn-warning">Editar</a>
                         <input type="button" class="btn btn-danger" value="Eliminar">
+                        <div class="btn">
+                            <select name="" id="" class="category_post form-control">
+                                @if($post->category!=null)
+                                    <option value="{{ $post->category->id }}" selected> {{ $post->category->name }} </option>
+                                    @foreach($categories as $category)
+                                        @if($category->id != $post->category->id)
+                                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <option value="null" selected> Seleccione una categoría </option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                        </div>
                     </div>
                     <!-- NOT Completed -->
                     <div class="table_cell">
@@ -192,7 +214,12 @@
                 </div>
             </div>
         @endforeach
+        <!-- {{ json_encode($post) }} -->
     </div>
+
+    <!-- AngularJS v1.2.25 -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script> -->
+
     <!-- /.table-responsive -->
     <!-- WELL -->
     <!-- <div class="well">
@@ -217,10 +244,57 @@
     <script>
         $(document).ready(function() {
             $('#dataTables-example').dataTable();
-            $('.table_row_group').click(function(){
-                // $(this).hide();
-                $(location).attr( 'href', $(this).find('.btn.btn-info').attr('href') );
+
+            $(".category_post").change(function(){
+                $(".loading").animate({
+                    opacity: 1},
+                    400);
+                $(this).find("option[value='null']").remove();
+                $.post('',
+                    {
+                        id_post:$(this).closest(".table_row_bottom").find(".id_post").val(),
+                        category_post:$(this).val()
+                    })
+                    .done(function( data ) {
+                        // Hiding the icon of progress
+                        $(".loading").animate({opacity: 0}, 300, function() {
+                            // Replacement progress-icon for that of success-icon
+                            $(".loading").children('img').attr('src', 'http://4.bp.blogspot.com/-rdtQ8b-E6xU/UFte_R46gyI/AAAAAAAAAiI/dylOpDmAJHU/s1600/Ok%5B1%5D.png');
+                            // Showing the icon of success
+                            $(".loading").animate({opacity: 1}, 400, function(){
+                                    // Hiding the icon of success
+                                    $(".loading").animate({opacity: 0}, 200, function(){
+                                        // Replacement success-icon for that of default icon (progress-icon)
+                                        $(".loading").children('img').attr('src', 'http://www.clinicabaviera.com/imagenes/cargando.gif');
+                                    });
+                            });
+                        });
+                    })
+                    .error(function(data) {
+                        // Hide the icon
+                        $(".loading").css({opacity: 0});
+                        // Replace the icon of progress for tha error-icon
+                        $(".loading").children('img').attr('src', 'http://www.itlp.edu.mx/img/error.png');
+                        // Showing the icon of error
+                        $(".loading").animate({opacity: 1}, 300, function() {
+                            // Replacement progress-icon for that of success-icon
+                            // $(".loading").children('img').attr('src', 'http://www.itlp.edu.mx/img/error.png');
+                            // Showing the icon of success
+                            // $(".loading").animate({opacity: 1}, 400, function(){
+                            //         // Hiding the icon of success
+                            //         $(".loading").animate({opacity: 0}, 200, function(){
+                            //             // Replacement success-icon for that of default icon (progress-icon)
+                            //             $(".loading").children('img').attr('src', 'http://www.clinicabaviera.com/imagenes/cargando.gif');
+                            //         });
+                            // });
+                        });
+                        //
+                    });;
             });
+            // $('.table_row_group').click(function(){
+            //     // $(this).hide();
+            //     $(location).attr( 'href', $(this).find('.btn.btn-info').attr('href') );
+            // });
             // $(".table_row_group").hover( function(){
             //   $(this).animate({ opacity: 0.50}, 300);
             // }, function(){

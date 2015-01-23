@@ -47,7 +47,7 @@ class AdminController extends \BaseController {
 
 			$admin->people_id = $person->id;
 			$admin->username = Input::get('username');
-			$admin->password = Hash::make('osama8818');
+			$admin->password = Hash::make('12345');
 
 			$admin->save();
 			return Redirect::To('admin/admins');

@@ -70,26 +70,26 @@ function load_content(){
 }
 
 function cambiarTituloText(){
-    $('#tittle_post').css('display', 'inline');
-    $('#div_text_tittle_post').css('display', 'inline');
-    $('#tittle_post_label').css('display', 'none');
+    $('#title_post').css('display', 'inline');
+    $('#div_text_title_post').css('display', 'inline');
+    $('#title_post_label').css('display', 'none');
     $('#div_label_name_post').css('display', 'none');
-    document.getElementById('tittle_post').focus();
-    document.getElementById('tittle_post').select();
+    document.getElementById('title_post').focus();
+    document.getElementById('title_post').select();
 
 }
 function cambiarTituloLabel(){
-    $('#tittle_post').css('display', 'none');
-    $('#div_text_tittle_post').css('display', 'none');
-    $('#tittle_post_label').css('display', 'inline');
+    $('#title_post').css('display', 'none');
+    $('#div_text_title_post').css('display', 'none');
+    $('#title_post_label').css('display', 'inline');
     $('#div_label_name_post').css('display', 'inline');
-    if($('#tittle_post').val()==''){
-        $('#tittle_post').val($('#tittle_post_label').html());
+    if($('#title_post').val()==''){
+        $('#title_post').val($('#title_post_label').html());
     }
-    if($('#tittle_post_label').html() != $('#tittle_post').val() && document.getElementById('btnPreview').style.display != "inline"){
+    if($('#title_post_label').html() != $('#title_post').val() && document.getElementById('btnPreview').style.display != "inline"){
         $('#btnSave').css('display', 'inline');
         load_content();
     }
-    $('#tittle_post_label').html($('#tittle_post').val());
+    $('#title_post_label').html($('#title_post').val());
 }
 

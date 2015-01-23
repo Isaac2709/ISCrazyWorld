@@ -7,9 +7,10 @@ class CategoryController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		//
+		$categories = Category::all();
+		return View::make('admin.category.index')->with('categories', $categories);
 	}
 
 
@@ -18,7 +19,7 @@ class CategoryController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function getCreate()
 	{
 		//
 	}
@@ -53,7 +54,7 @@ class CategoryController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getEdit($id)
 	{
 		//
 	}
@@ -77,7 +78,7 @@ class CategoryController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function postDelete($id)
 	{
 		//
 	}
