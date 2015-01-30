@@ -37,16 +37,16 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-
-                <h1 class="page-header">
+                @yield('header')
+                <!-- <h1 class="page-header">
                     ISCrazyWorld
                     <small>¡El extraño mundo de Isaac!</small>
-                </h1>
+                </h1> -->
 
                 @yield('container')
 
                 <!-- Second Blog Post -->
-                <h2>
+                <!-- <h2>
                     <a href="#">Blog Post Title</a>
                 </h2>
                 <p class="lead">
@@ -59,17 +59,18 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
+                <hr> -->
 
                 <!-- Pager -->
-                <ul class="pager">
+                <!-- <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Older</a>
                     </li>
                     <li class="next">
                         <a href="#">Newer &rarr;</a>
                     </li>
-                </ul>
+                </ul> -->
+                @yield('pagination')
 
             </div>
 

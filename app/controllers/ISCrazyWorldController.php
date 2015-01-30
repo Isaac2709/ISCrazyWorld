@@ -9,8 +9,10 @@ class ISCrazyWorldController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Entrada::all();
-		$posts = $posts->sortBy('date');
+		// $posts = Entrada::paginate(2); // Consult to the database all posts published
+		$posts = Entrada::orderBy('date', 'ASC')->paginate(2); // Consult to the database all posts published
+		// $posts = $posts->sortBy('date'); // Sort the list of posts by date of publication
+		// $posts = $posts->paginate(2); // Create the pagination of posts by the category
 		return View::make('index')->with('posts', $posts);
 	}
 
@@ -32,10 +34,26 @@ class ISCrazyWorldController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function category($category_name)
 	{
-		//
+		$category = Category::where('name', '=', $category_name)->first();
+		$posts = Entrada::where('category_id', '=', $category->id); // Call the query to the database with filter post
+		$posts->posts_size = $posts->count();
+		$posts = $posts->orderBy('date'); // Sort the list of posts by date of publication
+		$posts = $posts->paginate(2); // Create the pagination of posts by the category
+		// $posts->setBaseUrl($category->name);
+		return View::make('category.index')->with('category', $category)->with('posts', $posts);
 	}
+	// public function category($id_category)
+	// {
+	// 	$category = Category::find($id_category);
+	// 	$posts = Entrada::where('category_id', '=', $id_category); // Call the query to the database with filter post
+	// 	$posts->posts_size = $posts->count();
+	// 	$posts = $posts->orderBy('date'); // Sort the list of posts by date of publication
+	// 	$posts = $posts->paginate(2); // Create the pagination of posts by the category
+	// 	// $posts->setBaseUrl($category->name);
+	// 	return View::make('category.index')->with('category', $category)->with('posts', $posts);
+	// }
 
 
 	/**

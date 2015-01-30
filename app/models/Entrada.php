@@ -28,4 +28,10 @@ class Entrada extends Eloquent{
     public function category(){
         return $this->belongsTo('Category');
     }
+
+    public function scopeDateDescending($query)
+    {
+        return $query->orderBy('date','ASC');
+        // return $query->orderBy('date','DESC');
+    }
 }

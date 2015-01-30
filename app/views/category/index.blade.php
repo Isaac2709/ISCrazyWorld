@@ -1,14 +1,14 @@
 @extends('layouts.layout')
 
 @section('title_page')
-    Página Principal
+	{{ $category->name }}
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        ISCrazyWorld
-        <small>¡El extraño mundo de Isaac!</small>
-    </h1>
+	<h1 class="page-header">
+	    ISCrazyWorld
+	    <small>{{ $category->name }}</small>
+	</h1>
 @stop
 
 @section('container')
@@ -43,5 +43,14 @@
 @stop
 
 @section('pagination')
+    <!-- Pager -->
+    <!-- <ul class="pager">
+        <li class="previous">
+            <a href="#">&larr; Older</a>
+        </li>
+        <li class="next">
+            <a href="#">Newer &rarr;</a>
+        </li>
+    </ul> -->
     {{ $posts->links() }}
 @stop

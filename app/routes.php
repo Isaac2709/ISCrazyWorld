@@ -13,6 +13,7 @@
 // The blog routes
 Route::get('/', 'ISCrazyWorldController@index');
 Route::get('post/{id}', 'ISCrazyWorldController@post');
+Route::get('category/{id}', 'ISCrazyWorldController@category');
 
 // The routes for the managers the web site
 // The main route

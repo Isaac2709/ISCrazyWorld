@@ -18,7 +18,7 @@ class PostController extends BaseController {
 	public function getIndex()
 	{
 		$categories = Category::all();
-		$posts = Entrada::All();
+		$posts = Entrada::dateDescending()->get();
 		return View::make('admin.post.index')->with('posts', $posts)->with('categories', $categories);
 	}
 
