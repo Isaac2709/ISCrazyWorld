@@ -15,11 +15,21 @@ class AuthAdminController extends BaseController {
 	|
 	*/
 
+	/**
+	 * Display the login page
+	 * @return [View] [The view for login of admin users]
+	 */
 	public function getLogin()
 	{
 		return View::make('admin.auth.login');
 	}
 
+	/**
+	 * Check that the credentials of the user are correct
+	 * @return [Redirect]
+	 *         [Redirect to main page(dashboard) of admin area of the webpage if the credentials are correct or
+	 *         Redirect to previous page(login page) with a error message]
+	 */
 	public function postLogin()
 	{
 		$credentials = array(
@@ -35,6 +45,10 @@ class AuthAdminController extends BaseController {
 		// return View::make('auth.login');
 	}
 
+	/**
+	 * Close the current session and deletes all data session cache
+	 * @return [Redirect] [The login page with a goodbye message]
+	 */
 	public function getLogout()
 	{
 		//Desconectamos al usuario

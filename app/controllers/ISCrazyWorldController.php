@@ -3,9 +3,8 @@
 class ISCrazyWorldController extends \BaseController {
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Display a listing of the resource (posts) to show in the main view of the blog.
+	 * @return [View]	[The view with the eloquent model of post]
 	 */
 	public function index()
 	{
@@ -18,9 +17,10 @@ class ISCrazyWorldController extends \BaseController {
 
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the "post" on the website that the user has requested
 	 *
-	 * @return Response
+	 * @param  [Digit] $id [The ID of the POST that the user wants to see]
+	 * @return [View]	[The view with the eloquent model of post]
 	 */
 	public function post($id)
 	{
@@ -28,11 +28,10 @@ class ISCrazyWorldController extends \BaseController {
 		return View::make('post.index')->with('post', $post);
 	}
 
-
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Show all posts filtered by a category
+	 * @param  [Text] $category_name [The category name that the user wants to filter]
+	 * @return [View]	[The view with all posts object(paginate) for show in the view]
 	 */
 	public function category($category_name)
 	{
@@ -44,6 +43,7 @@ class ISCrazyWorldController extends \BaseController {
 		// $posts->setBaseUrl($category->name);
 		return View::make('category.index')->with('category', $category)->with('posts', $posts);
 	}
+
 	// public function category($id_category)
 	// {
 	// 	$category = Category::find($id_category);

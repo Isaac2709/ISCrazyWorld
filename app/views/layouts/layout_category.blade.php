@@ -5,10 +5,10 @@
         <div class="col-lg-6">
             <ul class="list-unstyled">
                 <li>
-                    <a href="/category/manual">Manuales</a>
+                    <a href="/category/manual">Tutoriales</a>
                 </li>
                 <li>
-                    <a href="#">Category Name</a>
+                    <a href="#">Noticia</a>
                 </li>
                 <li>
                     <a href="#">Category Name</a>

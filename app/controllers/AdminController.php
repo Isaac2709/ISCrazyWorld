@@ -4,9 +4,9 @@ class AdminController extends \BaseController {
 
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the resource (admins) to show in the main view of the page for consult admins.
 	 *
-	 * @return Response
+	 * @return [View]	[The view with the eloquent model of all admins]
 	 */
 	public function getIndex()
 	{
@@ -16,9 +16,9 @@ class AdminController extends \BaseController {
 
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new resource (admin).
 	 *
-	 * @return Response
+	 * @return [View]	[The view with the form for create a new person of type admin]
 	 */
 	public function getCreate()
 	{
@@ -29,7 +29,7 @@ class AdminController extends \BaseController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @return Response
+	 * @return [Redirect]	[The index (main page) for consult the admins]
 	 */
 	public function postCreate()
 	{

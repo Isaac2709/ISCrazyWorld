@@ -32,6 +32,9 @@
             <li>
                 <a href="{{ URL::TO('admin/posts') }}" @yield('post_active')><i class="fa fa-edit fa-fw"></i> Entradas</a>
             </li>
+            <li>
+                <a href="{{ URL::TO('admin/projects') }}" @yield('portfolio_active')><i class="fa fa-edit fa-fw"></i> Portafolio</a>
+            </li>
             <li @yield('manage_active')>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Gestionar<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

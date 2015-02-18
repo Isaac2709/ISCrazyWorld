@@ -15,6 +15,10 @@ Route::get('/', 'ISCrazyWorldController@index');
 Route::get('post/{id}', 'ISCrazyWorldController@post');
 Route::get('category/{id}', 'ISCrazyWorldController@category');
 
+Route::get('portafolio', function(){
+	return View::make('portfolio.index');
+});
+
 // The routes for the managers the web site
 // The main route
 Route::get('admin', function()
@@ -23,6 +27,7 @@ Route::get('admin', function()
 });
 // The controllers routes
 Route::controller('admin/posts', 'PostController');
+Route::controller('admin/projects', 'ProjectController');
 Route::controller('admin/admins', 'AdminController');
 Route::controller('admin/categories', 'CategoryController');
 

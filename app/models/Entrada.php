@@ -34,4 +34,9 @@ class Entrada extends Eloquent{
         return $query->orderBy('date','ASC');
         // return $query->orderBy('date','DESC');
     }
+
+    public function scopeProjects($query)
+    {
+        return $query->where('category_id', '=', 3);
+    }
 }

@@ -45,11 +45,16 @@
                 <h1>@yield('title_post')</h1>
 
                 <!-- Author -->
-                <p class="lead">
+                <!-- <p class="lead">
                     by <a href="#">Start Bootstrap</a>
                 </p>
-                <!-- Date/Time -->
+                Date/Time
                 <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+                -->
+
+                <p><span class="glyphicon glyphicon-time"></span> Posted on @yield('date_post')
+                by <a href="index.php">@yield('author_post')</a>
+                </p>
 
                 <hr>
 
